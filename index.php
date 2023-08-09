@@ -1,3 +1,17 @@
+<?php
+    require_once 'includes/login.php';
+    
+    $objfunc = new cliente();
+
+    if(isset($_POST['btLogar'])){
+        $objfunc->logar($_POST);
+    }else{
+        echo "error";
+    }
+
+    var_dump($_POST);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,23 +27,25 @@
                 <h1 class="titulo">Login</h1>
             
             <div class="conjunto-login">
-                <form action='' method="POST">
+                <form action='includes/login.php' method="POST">
                     <div class="input-group-login">
                         <span class="input-group-icon">@</span>
-                        <input type="email"    name="email" placeholder="Username" class="campo" required/> </br>
+                        <input type="text" name="username" placeholder="Username" class="campo" required/> </br>
                     </div>
 
                     <div class="input-group-login">
                         <span class="input-group-icon">@</span>
-                        <input type="password" name="senha" placeholder="Password" class="campo" required/> </br>
+                        <input type="password" name="password" placeholder="Password" class="campo" required/> </br>
                     </div>
-                    
+                  
+                    <!--
                     <div class="checkbox-login">
                         <input type="checkbox" name="remember" value="yes">
                             <p class="textP">Lembre das minhas credênciais</p>
                             <a href="#">Esqueci minha senha</a>
                     </div>
-                    <input type="submit" name="enviar" value="Confirmar!" class="botao"/>
+-->
+                    <button type="submit" name="btLogar" class="botao">Logar</button>
                 </form>
 
                     <h4>Ou faça login com</h4>
@@ -43,7 +59,3 @@
     </div>
 </body>
 </html>
-
-<script>
-
-</script>
