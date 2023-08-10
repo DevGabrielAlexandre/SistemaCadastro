@@ -4,12 +4,11 @@
 
     if(empty($_POST) or (empty($_POST["username"] or 
                         (empty($_POST["password"]))))){
-        print "<script>location.href = 'index.php':<script>";
+        print "<script>location.href = '../index.php':<script>";
     }
     
     include_once "conexao.php";
     include_once "funcoes.php";
-    include_once "login.php";
 
 
     class cliente {
@@ -18,11 +17,12 @@
         private $objFunc;
         private $id;
         private $email;
-        private $nome;
-        private $senha;
+        private $username;
+        private $password;
         private $dataCadastro;
         private $nascimento;
         private $endereco;
+        private $telefone;
 
         //CONSTRUTOR
         public function __construct(){
@@ -39,27 +39,28 @@
         }
 
     public function logar($dado){
-            $this->nome = $dado['username'];
-            $this->senha = sha1 ($dado['password']);
-            try{
-                    $cst = $this->con->conectar()->prepare("SELECT 'nome', 'senha' FROM 'login'
-                     WHERE 'nome' = ':username' AND 'senha' = ':password;'");
-                     $cst->bindParam(":username", $this->nome, PDO::PARAM_STR);
-                     $cst->bindParam(":password", $this->senha, PDO::PARAM_STR);
-                     $cst->execute();
-                     if($cst->rowCount() == 0) {
-                        header('location: /ola.html');
+            $this->username = $dado['username'];
+            $this->password = $dado['password'];
 
-                     }else{
+            if(isset($_POST['btLogar'])){
+                
+                    $cst = $this->con->conectar()->prepare("SELECT * FROM login
+                     WHERE nome = :username AND senha = :password;");
+                     $cst->bindParam(":username", $this->username, PDO::PARAM_STR);
+                     $cst->bindParam(":password", $this->password, PDO::PARAM_STR);
+                     $cst->execute();
+                     if($cst->rowCount() != 0) {
+
                         session_start();
                         $result = $cst->fetch();
                         $_SESSION['logado'] = "sim";
                         $_SESSION['clt'] = $result['login'];
-                        header('location: /ola.html');
 
+                        header('Location: ola.php');
+                         
+                    }else{
+                        echo "Nome ou senha errada";
                     }
-            }catch(PDOException $e) {
-                return $e->getMessage();
             }
         }
     }

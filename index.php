@@ -1,5 +1,5 @@
 <?php
-    require_once 'includes/login.php';
+    include_once 'includes/login.php';
     
     $objfunc = new cliente();
 
@@ -9,11 +9,10 @@
         echo "error";
     }
 
-    var_dump($_POST);
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +26,7 @@
                 <h1 class="titulo">Login</h1>
             
             <div class="conjunto-login">
-                <form action='includes/login.php' method="POST">
+                <form method="POST">
                     <div class="input-group-login">
                         <span class="input-group-icon">@</span>
                         <input type="text" name="username" placeholder="Username" class="campo" required/> </br>
@@ -38,15 +37,16 @@
                         <input type="password" name="password" placeholder="Password" class="campo" required/> </br>
                     </div>
                   
-                    <!--
+                 
                     <div class="checkbox-login">
                         <input type="checkbox" name="remember" value="yes">
                             <p class="textP">Lembre das minhas credênciais</p>
                             <a href="#">Esqueci minha senha</a>
                     </div>
--->
-                    <button type="submit" name="btLogar" class="botao">Logar</button>
+
+                    <button type="submit" id="btLogar" name="btLogar" value="btLogar" >Logar</button>
                 </form>
+
 
                     <h4>Ou faça login com</h4>
                         <a href="#"><img src="#"></a>
